@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
+import tkinter as tk
 
 def update_board(board):
     rows, cols = len(board), len(board[0])
@@ -44,26 +45,18 @@ def conway(board, steps, disp=False):
         for _ in range(steps):
             board = update_board(board)
         return board
-    
-# Example usage
-# Set the board size here
-BOARD_SIZE = 10  # Change this value to vary the pixel amount
 
-board = [[0 for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
-
-def onclick(event):
-    if event.inaxes:
-        x, y = int(event.xdata + 0.5), int(event.ydata + 0.5)
-        if 0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE:
-            board[y][x] = 1 - board[y][x]
-            img.set_data(board)  # Use set_data instead of set_array for instant update
-            plt.draw_idle()      # Use draw_idle for immediate redraw
-
-fig, ax = plt.subplots()
-img = ax.imshow(board, cmap='binary')
-ax.set_title("Click to toggle cells. Close window when done.")
-cid = fig.canvas.mpl_connect('button_press_event', onclick)
-plt.show()
-fig.canvas.mpl_disconnect(cid)
+board = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 0, 0]
+]
 
 conway(board, 50, disp=True)
