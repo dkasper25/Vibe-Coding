@@ -1,3 +1,5 @@
+
+
 import tkinter as tk
 
 CELL_SIZE = 12
@@ -73,11 +75,10 @@ class GameOfLife:
             for dc in (-1, 0, 1):
                 if dr == 0 and dc == 0:
                     continue
-                r, c = row + dr, col + dc
-                if 0 <= r < GRID_SIZE and 0 <= c < GRID_SIZE:
-                    count += self.grid[r][c]
+                r = (row + dr) % GRID_SIZE
+                c = (col + dc) % GRID_SIZE
+                count += self.grid[r][c]
         return count
-
     def update_canvas(self):
         for i in range(GRID_SIZE):
             for j in range(GRID_SIZE):
